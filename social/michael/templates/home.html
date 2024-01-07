@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container text-center">
+        <div class="row">
+            <div class=col-8>
+
+    <h1>Meeps!</h1>
+<br/>
+
+<div class="posts" id="scroll-element">
+    {% include 'show_meeps.html' with posts=posts %}
+</div>
+   
+<div id="bottom-sentinel"></div>
+</div>
+
+<div class="col-4">
+               <br/><br/><br/>
+{% if form %}
+<form method=POST>
+    {% csrf_token %}
+    {{ form.as_p }}            
+    <button type="submit" class="btn btn-secondary">Post Meep!</button>
+</form>
+{% endif %}
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let bottomSentinel = document.querySelector("#bottom-sentinel");
+      let scrollElement = document.querySelector("#scroll-element");
+      let baseUrl = "{% url 'post-list' %}";
+      console.log(baseUrl);
+      attachInfiniteScroll(bottomSentinel, scrollElement, baseUrl);
+    })
+  </script>
+
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+            <h1>Meeps!</h1>
+            <!-- ... Your meep listing code ... -->
+            
+            <!-- Pagination Links -->
+            {% if meeps.has_previous %}
+                <a href="?direction=prev&value={{ value|urlencode }}&pk={{ pk|urlencode }}">Previous</a>
+            {% endif %}
+            
+            <span>{{ meeps.number }} of {{ meeps.paginator.num_pages }}</span>
+            
+            {% if meeps.has_next %}
+                <a href="?direction=next&value={{ value|urlencode }}&pk={{ pk|urlencode }}">Next</a>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            <!-- Your form code for posting new meeps -->
+        </div>
+    </div>
+</div>
+{% endblock %}
